@@ -1,17 +1,24 @@
-import Square from "../components/square";
+type Player = "X" | "O" | null;
 
-type BoardProps = {
-  squares: ("X" | "O" | null)[];
+interface BoardProps {
+  squares: Player[];
   onSquareClick: (index: number) => void;
-};
+}
 
 export default function Board({ squares, onSquareClick }: BoardProps) {
   return (
-    <div className="container gap-4">
-      {squares.map((value, i) => (
-        <Square key={i} value={value} onClick={() => onSquareClick(i)} />
+    <div className="grid grid-cols-3 gap-2">
+      {squares.map((square, index) => (
+        <button
+          key={index}
+          onClick={() => onSquareClick(index)}
+          className="w-20 h-20 flex items-center justify-center text-3xl font-bold 
+                     rounded-lg bg-slate-600 hover:bg-slate-500 
+                     transition-colors shadow-md text-white"
+        >
+          {square}
+        </button>
       ))}
     </div>
   );
 }
-  
